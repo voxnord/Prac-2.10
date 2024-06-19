@@ -6,14 +6,16 @@
 using namespace std;
 
 // Структура узла списка
-struct Node {
+struct Node 
+{
     int data;
     Node* next;
     Node(int d) : data(d), next(nullptr) {}
 };
 
 // Класс очереди на основе однонаправленного списка
-class Queue {
+class Queue 
+{
 private:
     Node* front;  // Указатель на начало очереди
     Node* rear;   // Указатель на конец очереди
@@ -22,65 +24,81 @@ public:
     Queue() : front(nullptr), rear(nullptr) {}
 
     // Метод добавления элемента в очередь
-    void enqueue(int data) {
+    void enqueue(int data) 
+    {
         Node* newNode = new Node(data);
-        if (rear == nullptr) {
+        if (rear == nullptr) 
+        {
             front = rear = newNode;
         }
-        else {
+        else 
+        {
             rear->next = newNode;
             rear = newNode;
         }
     }
 
     // Метод удаления элемента из очереди
-    void dequeue() {
-        if (front == nullptr) {
+    void dequeue() 
+    {
+        if (front == nullptr) 
+        {
             cerr << "Очередь пустая" << endl;
             return;
         }
         Node* temp = front;
         front = front->next;
-        if (front == nullptr) {
+        if (front == nullptr) 
+        {
             rear = nullptr;
         }
         delete temp;
     }
 
     // Метод получения первого элемента очереди
-    int peek() const {
-        if (front != nullptr) {
+    int peek() const 
+    {
+        if (front != nullptr) 
+        {
             return front->data;
         }
         throw runtime_error("Очередь пустая");
     }
 
     // Метод проверки, пуста ли очередь
-    bool isEmpty() const {
+    bool isEmpty() const 
+    {
         return front == nullptr;
     }
 
     // Метод очистки очереди
-    void clear() {
-        while (!isEmpty()) {
+    void clear() 
+    {
+        while (!isEmpty()) 
+        {
             dequeue();
         }
     }
 
     // Деструктор для очистки памяти
-    ~Queue() {
+    ~Queue() 
+    {
         clear();
     }
 
     // Метод поиска минимального элемента в очереди
-    int findMin() const {
-        if (isEmpty()) {
+    int findMin() const 
+    {
+        if (isEmpty()) 
+        {
             throw runtime_error("Очередь пустая");
         }
         int min = INT_MAX;
         Node* current = front;
-        while (current != nullptr) {
-            if (current->data < min) {
+        while (current != nullptr) 
+        {
+            if (current->data < min) 
+            {
                 min = current->data;
             }
             current = current->next;
@@ -89,9 +107,11 @@ public:
     }
 
     // Метод печати элементов очереди
-    void print() const {
+    void print() const 
+    {
         Node* current = front;
-        while (current != nullptr) {
+        while (current != nullptr) 
+        {
             cout << current->data << " ";
             current = current->next;
         }
@@ -105,7 +125,7 @@ int main() {
     SetConsoleOutputCP(1251);
 
 
-    cout << "Практика: 10 \n\rВариант 8\r\n\r\n";
+    cout << "Практика: 10 \n\rВариант: 8\r\n\r\n";
 
     Queue q;
 
@@ -121,11 +141,13 @@ int main() {
     q.print();
 
     // Поиск минимального элемента
-    try {
+    try 
+    {
         int minElement = q.findMin();
         cout << "Минимальный элемент очереди: " << minElement << endl;
     }
-    catch (const exception& e) {
+    catch (const exception& e) 
+    {
         cerr << e.what() << endl;
     }
 
